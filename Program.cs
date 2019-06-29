@@ -7,7 +7,7 @@ namespace QuadTree
     {
         static void Main(string[] args)
         {
-            var root = new Quad(new Point(0, 100), new Point(100, 0));
+            var root = new Quad(new Point(0, 100), new Point(100, 0), 10);
             Node nd;
             Random r = new Random();
             var nodes = new List<Node>();

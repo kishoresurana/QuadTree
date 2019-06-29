@@ -23,8 +23,9 @@ public class Quad{
     Point topLeft;
     Point botRight;
 
-    // Contains set of nodes. Do not exceed 10 nodes
+    // Contains set of nodes. Do not exceed MAX_NODE_CNT nodes
     List<Node> nodes;
+    private readonly int MAX_NODE_CNT;
 
     // Children of this tree
     Quad topLeftTree;
@@ -32,10 +33,11 @@ public class Quad{
     Quad botLeftTree;
     Quad botRightTree;
 
-    public Quad(Point _topLeft, Point _botRight){
+    public Quad(Point _topLeft, Point _botRight, int _max_node_cnt){
         topLeft = _topLeft;
         botRight = _botRight;
-        nodes = new List<Node>();        
+        nodes = new List<Node>();   
+        MAX_NODE_CNT = _max_node_cnt;
     }
 
     // Insert a node into the quad tree
@@ -54,7 +56,8 @@ public class Quad{
                 if ((topLeft.y + botRight.y)/2 >= node.pos.y){
                     if (botLeftTree == null){
                         botLeftTree = new Quad(new Point(topLeft.x, (topLeft.y + botRight.y)/2)
-                                        , new Point((topLeft.x + botRight.x)/2, botRight.y));
+                                        , new Point((topLeft.x + botRight.x)/2, botRight.y)
+                                        , MAX_NODE_CNT);
                     }
                     botLeftTree.Insert(node);
                 }
@@ -62,7 +65,8 @@ public class Quad{
                 else {
                     if (topLeftTree == null){
                         topLeftTree = new Quad(new Point(topLeft.x, topLeft.y)
-                                        , new Point((topLeft.x + botRight.x) / 2, (topLeft.y + botRight.y) / 2)); 
+                                        , new Point((topLeft.x + botRight.x) / 2, (topLeft.y + botRight.y) / 2)
+                                        , MAX_NODE_CNT); 
                     }
                     topLeftTree.Insert(node); 
                 }
@@ -73,7 +77,8 @@ public class Quad{
                 {
                     if (botRightTree == null){
                         botRightTree = new Quad(new Point((topLeft.x + botRight.x) / 2, (topLeft.y + botRight.y) / 2)
-                                        , new Point(botRight.x, botRight.y)); 
+                                        , new Point(botRight.x, botRight.y)
+                                        , MAX_NODE_CNT); 
                     }
                     botRightTree.Insert(node);
                 }        
@@ -82,13 +87,14 @@ public class Quad{
                 { 
                     if (topRightTree == null) {
                         topRightTree = new Quad(new Point((topLeft.x + botRight.x) / 2, topLeft.y)
-                                        , new Point(botRight.x, (topLeft.y + botRight.y) / 2)); 
+                                        , new Point(botRight.x, (topLeft.y + botRight.y) / 2)
+                                        , MAX_NODE_CNT); 
                     }
                     topRightTree.Insert(node); 
                 } 
             }
         }
-        else if (nodes.Count == 10){
+        else if (nodes.Count == MAX_NODE_CNT){
             foreach (var chnode in nodes){
                 Insert(chnode, true);
             }
@@ -96,7 +102,7 @@ public class Quad{
             nodes.Clear();
         }
         else {
-            // if this quad contains less than 10 nodes, insert this node
+            // if this quad contains less than MAX_NODE_CNT nodes, insert this node
             nodes.Add(node);
             return;
         }
