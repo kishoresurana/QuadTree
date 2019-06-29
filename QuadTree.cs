@@ -95,10 +95,13 @@ public class Quad{
             }
         }
         else if (nodes.Count == MAX_NODE_CNT){
+            // If this quad already contains the max number of nodes, split the quad, and move the points into the correct subquads.
             foreach (var chnode in nodes){
                 Insert(chnode, true);
             }
             Insert(node, true);
+
+            // clear the nodes since they have been moved to subquads
             nodes.Clear();
         }
         else {
