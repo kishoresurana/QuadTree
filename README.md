@@ -16,7 +16,7 @@ Note that a quadtree is very regular - it is, in fact, a trie, since the values 
 
 ## Code architectecture
 The key classes and methods for this implementation are:
-* Quad class (quad_tree.cs)
+* Quad class (QuadTree.cs)
   - Insert - method to insert items to a quad tree
   - Search - method to search if an item exists in quad tree
 * Program class (Program.cs)
