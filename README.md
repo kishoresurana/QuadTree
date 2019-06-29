@@ -1,5 +1,5 @@
 # QuadTree
-This repository is a C# implementation of a QuadTree with the criteria that there aer no more than 10 items in a single Quad.
+This repository is a C# implementation of a QuadTree with the criteria that there are no more than 10 items in a single Quad.
 
 ## Explanation of Quad tree (from reference):
 Quadtrees are a very straightforward spatial indexing technique. In a Quadtree, each quad represents a bounding box covering some part of the space being indexed, with the root quad covering the entire area. Each quad is either a leaf quad - in which case it contains one or more indexed points, and no children, or it is an internal quad, in which case it has exactly four children, one for each quadrant obtained by dividing the area covered in half along both axes - hence the name.
